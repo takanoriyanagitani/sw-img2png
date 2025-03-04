@@ -60,3 +60,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+*.swp
+Examples/ImageFileToPngFile/sample.d/out.png
+Examples/ImageFileToPngFile/sample.d/Vulphere_WebP_OTAGROOVE_demonstration_2.webp
