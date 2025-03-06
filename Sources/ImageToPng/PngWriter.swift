@@ -1,5 +1,8 @@
 import class CoreFoundation.CFString
 import class CoreGraphics.CGColorSpace
+import func CoreGraphics.CGColorSpaceCreateDeviceCMYK
+import func CoreGraphics.CGColorSpaceCreateDeviceGray
+import func CoreGraphics.CGColorSpaceCreateDeviceRGB
 import class CoreImage.CIContext
 import struct CoreImage.CIFormat
 import class CoreImage.CIImage
@@ -24,6 +27,26 @@ public struct PngWriteOption {
         colorSpace: self.color
       )
     })
+  }
+
+  public static func deviceRgb(fmt: CIFormat) -> Self {
+    Self(fmt: fmt, color: CGColorSpaceCreateDeviceRGB())
+  }
+
+  public static func deviceCMYK(fmt: CIFormat) -> Self {
+    Self(fmt: fmt, color: CGColorSpaceCreateDeviceCMYK())
+  }
+
+  public static func deviceGray(fmt: CIFormat) -> Self {
+    Self(fmt: fmt, color: CGColorSpaceCreateDeviceGray())
+  }
+
+  public func withFormat(fmt: CIFormat) -> Self {
+    Self(fmt: fmt, color: self.color)
+  }
+
+  public func withColor(color: CGColorSpace) -> Self {
+    Self(fmt: self.fmt, color: color)
   }
 
   public func imageToPng(ictx: CIContext, img: CIImage, to: URL) -> IO<Void> {
